@@ -2,12 +2,16 @@
 //by Art0v1r0s
 //read a files(morseF) et convert the sentence into a morse alpha
 #include<stdio.h>
+#include <stdlib.h>
 #include<string.h>
 #include<ctype.h>
 #include<time.h>
 
 int main(int argc, char *argv[])
 {
+  int end = 0;
+  time_t t = time(NULL); /* t contient maintenant la date et l'heure courante */
+  do {
     FILE* fichier = NULL;
     int caractereActuel = 0;
 
@@ -15,9 +19,6 @@ int main(int argc, char *argv[])
                        "-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-",
         "...-",".--","-..-","-.--","--.."};
     char *nummorse[]={"-----",".----","..---","...--","....-",".....","-....","--...","---..","----."};
-
-    time_t t = time(NULL); /* t contient maintenant la date et l'heure courante */
-
 
     fichier = fopen("morseF.txt", "r");
 
@@ -43,13 +44,19 @@ int main(int argc, char *argv[])
                }
 
             //printf("%c", caractereActuel); // On l'affiche
+
         } while (caractereActuel != EOF); // On continue tant que fgetc n'a pas retourné EOF (fin de fichier)
         //ferme fichier
         fclose(fichier);
+
     }
+    printf("\n voulez vous recomencez 0 sinon 1:");
+    scanf("%d ",end);
+
+  } while(end!=0);
     printf("\n");
     //affiche date et heure;
     printf("%s\n", ctime(&t));
 
-    return 0;
+    return EXIT_SUCCESS;
 }
